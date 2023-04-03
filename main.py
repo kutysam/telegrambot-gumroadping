@@ -18,7 +18,8 @@ def pap_gumroad(request):
     email = request.form.get('email')
     price = int(request.form.get('price'))
     full_name = request.form.get('full_name')
-    message = f"🤑💰 KACHING KACHING 🤑💰\n*Product:* {product}\n*Price (After gumroad fee)* - `{currency.upper()}${(price-fee)/100}`\n*User:* {full_name}\n*User Email:* {email}\n*User Country:* {country}\n*Referral Source:* {referrer}\n"
+    variants = request.form.get('variants[]')
+    message = f"🤑💰 KACHING KACHING 🤑💰\n*Product:* `{product}`\n*Variant:* `{variants}`\n*Price (After gumroad fee)* - `USD${(price-fee)/100}`\n*User:* `{full_name}`\n*User Email:* `{email}`\n*User Currency | Country:* `{currency.upper()} | {country}` \n*Referral Source:* `{referrer}`\n"
 
     url = f"https://api.telegram.org/bot{TOKEN}/sendMessage?chat_id={chat_id}&text={message}&parse_mode=Markdown&disable_web_page_preview=True"
 
